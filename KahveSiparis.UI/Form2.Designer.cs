@@ -36,6 +36,7 @@
             cbUrunler = new ComboBox();
             label2 = new Label();
             label1 = new Label();
+            lstvSiparisler = new ListView();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             btnSiparisAl.TabIndex = 7;
             btnSiparisAl.Text = "Sipariş Al";
             btnSiparisAl.UseVisualStyleBackColor = true;
+            btnSiparisAl.Click += btnSiparisAl_Click;
             // 
             // chklbEkstraMalzemeler
             // 
@@ -114,16 +116,24 @@
             label1.TabIndex = 0;
             label1.Text = "Ürünler";
             // 
+            // lstvSiparisler
+            // 
+            lstvSiparisler.Location = new Point(590, 73);
+            lstvSiparisler.Name = "lstvSiparisler";
+            lstvSiparisler.Size = new Size(1027, 339);
+            lstvSiparisler.TabIndex = 1;
+            lstvSiparisler.UseCompatibleStateImageBehavior = false;
+            // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1201, 624);
+            ClientSize = new Size(1704, 788);
+            Controls.Add(lstvSiparisler);
             Controls.Add(groupBox1);
             Font = new Font("Segoe UI", 12F);
             Margin = new Padding(4);
             Name = "Form2";
-            Text = "Form2";
             Load += Form2_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -140,5 +150,6 @@
         private Label label3;
         private ComboBox cbUrunler;
         private Button btnSiparisAl;
+        private ListView lstvSiparisler;
     }
 }

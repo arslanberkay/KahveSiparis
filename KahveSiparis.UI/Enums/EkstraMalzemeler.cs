@@ -8,9 +8,9 @@ namespace KahveSiparis.UI.Enums
 {
     public enum EkstraMalzemeler
     {
-        SicakSut = 4000,
-        SogukSut = 2000,
-        Surup = 3000,
+        SicakSut = 5000,
+        SogukSut = 3000,
+        Surup = 4000,
         Seker = 2000,
         Tarcin = 1000,
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KahveSiparis.UI.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace KahveSiparis.UI.Interfaces
         public string UrunAdi { get; set; }
         public int HazirlanmaSuresi { get; set; }
         public double BegenilmeOrani { get; set; }
+        public List<EkstraMalzemeler> EkstraMalzemelerListesi { get; set; } = new List<EkstraMalzemeler>();
 
         public override string ToString()
         {
