@@ -38,7 +38,11 @@
             label1 = new Label();
             lstvSiparisler = new ListView();
             panel1 = new Panel();
-            lblHazirlanmaAlani = new Label();
+            lblTeslimEdilenler = new Label();
+            lblhazirlanmaAlani = new Label();
+            btnGeri = new Button();
+            lblCalisan1 = new Label();
+            lblCalisan2 = new Label();
             groupBox1.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -122,32 +126,68 @@
             // 
             // lstvSiparisler
             // 
-            lstvSiparisler.Location = new Point(590, 73);
+            lstvSiparisler.Location = new Point(557, 73);
             lstvSiparisler.Name = "lstvSiparisler";
-            lstvSiparisler.Size = new Size(1027, 321);
+            lstvSiparisler.Size = new Size(1070, 321);
             lstvSiparisler.TabIndex = 1;
             lstvSiparisler.UseCompatibleStateImageBehavior = false;
             // 
             // panel1
             // 
-            panel1.Controls.Add(lblHazirlanmaAlani);
-            panel1.Location = new Point(100, 489);
+            panel1.Controls.Add(lblTeslimEdilenler);
+            panel1.Controls.Add(lblhazirlanmaAlani);
+            panel1.Location = new Point(94, 510);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1428, 281);
+            panel1.Size = new Size(1405, 281);
             panel1.TabIndex = 2;
             // 
-            // lblHazirlanmaAlani
+            // lblTeslimEdilenler
             // 
-            lblHazirlanmaAlani.Location = new Point(51, 26);
-            lblHazirlanmaAlani.Name = "lblHazirlanmaAlani";
-            lblHazirlanmaAlani.Size = new Size(1290, 153);
-            lblHazirlanmaAlani.TabIndex = 0;
+            lblTeslimEdilenler.Location = new Point(801, 22);
+            lblTeslimEdilenler.Name = "lblTeslimEdilenler";
+            lblTeslimEdilenler.Size = new Size(428, 242);
+            lblTeslimEdilenler.TabIndex = 0;
+            // 
+            // lblhazirlanmaAlani
+            // 
+            lblhazirlanmaAlani.Location = new Point(33, 22);
+            lblhazirlanmaAlani.Name = "lblhazirlanmaAlani";
+            lblhazirlanmaAlani.Size = new Size(731, 242);
+            lblhazirlanmaAlani.TabIndex = 0;
+            // 
+            // btnGeri
+            // 
+            btnGeri.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 162);
+            btnGeri.Location = new Point(22, 12);
+            btnGeri.Name = "btnGeri";
+            btnGeri.Size = new Size(43, 43);
+            btnGeri.TabIndex = 3;
+            btnGeri.Text = "<";
+            btnGeri.UseVisualStyleBackColor = true;
+            btnGeri.Click += btnGeri_Click;
+            // 
+            // lblCalisan1
+            // 
+            lblCalisan1.Location = new Point(169, 467);
+            lblCalisan1.Name = "lblCalisan1";
+            lblCalisan1.Size = new Size(137, 31);
+            lblCalisan1.TabIndex = 4;
+            // 
+            // lblCalisan2
+            // 
+            lblCalisan2.Location = new Point(397, 467);
+            lblCalisan2.Name = "lblCalisan2";
+            lblCalisan2.Size = new Size(157, 28);
+            lblCalisan2.TabIndex = 4;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1704, 788);
+            ClientSize = new Size(1711, 832);
+            Controls.Add(lblCalisan2);
+            Controls.Add(lblCalisan1);
+            Controls.Add(btnGeri);
             Controls.Add(panel1);
             Controls.Add(lstvSiparisler);
             Controls.Add(groupBox1);
@@ -173,6 +213,10 @@
         private Button btnSiparisAl;
         private ListView lstvSiparisler;
         private Panel panel1;
-        private Label lblHazirlanmaAlani;
+        private Label lblhazirlanmaAlani;
+        private Button btnGeri;
+        private Label lblTeslimEdilenler;
+        private Label lblCalisan1;
+        private Label lblCalisan2;
     }
 }

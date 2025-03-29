@@ -58,8 +58,6 @@ namespace KahveSiparis.UI
             TabloOlustur();
         }
 
-
-
         private void btnSiparisAl_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMusteriAdi.Text))
@@ -73,7 +71,6 @@ namespace KahveSiparis.UI
                 return;
             }
 
-           
             Icecek orijinalUrun = cbUrunler.SelectedItem as Icecek;
             IUrun seciliUrun = new Icecek
             {
@@ -82,9 +79,6 @@ namespace KahveSiparis.UI
                 HazirlanmaSuresi = orijinalUrun.HazirlanmaSuresi,
                 MusteriAdiSoyadi = txtMusteriAdi.Text
             };
-          
-
-            seciliUrun.EkstraMalzemelerListesi.Clear();
 
             int ekstraMalzemelerinHazirlanmaSuresi = 0;
             foreach (var seciliEkstraMalzeme in chklbEkstraMalzemeler.CheckedItems)
@@ -132,11 +126,11 @@ namespace KahveSiparis.UI
         {
             lstvSiparisler.View = View.Details;
             lstvSiparisler.GridLines = true;
-            lstvSiparisler.Columns.Add("Müşteri ", 200);
-            lstvSiparisler.Columns.Add("Ürün", 200);
-            lstvSiparisler.Columns.Add("Beğenilme Oranı", 200);
-            lstvSiparisler.Columns.Add("Ekstra Malzemeler", 200);
-            lstvSiparisler.Columns.Add("Hazırlanma Süresi", 200);
+            lstvSiparisler.Columns.Add("Müşteri ", 150);
+            lstvSiparisler.Columns.Add("Ürün", 150);
+            lstvSiparisler.Columns.Add("Beğenilme Oranı", 175);
+            lstvSiparisler.Columns.Add("Ekstra Malzemeler", 400);
+            lstvSiparisler.Columns.Add("Hazırlanma Süresi", 150);
 
         }
 
@@ -146,10 +140,12 @@ namespace KahveSiparis.UI
             {
                 if (calisanlar[i].MusaitlikDurumu)
                 {
-                    lblHazirlanmaAlani.Text += $"{calisanlar[i].AdSoyad} => Merhaba {musteriAdi.ToUpper()}. Siparişini {hazirlanmaSuresi / 1000} saniye içinde hazırlıyorum.{Environment.NewLine}";
+                    lblhazirlanmaAlani.Text += $"{calisanlar[i].AdSoyad} => Merhaba {musteriAdi.ToUpper()}. Siparişini {hazirlanmaSuresi / 1000} saniye içinde hazırlıyorum.{Environment.NewLine}";
+                    lblhazirlanmaAlani.ForeColor = Color.Red;
                     calisanlar[i].MusaitlikDurumu = false;
                     await Task.Delay(hazirlanmaSuresi);
-                    lblHazirlanmaAlani.Text += $"{musteriAdi.ToUpper()} ürününüz hazır!{Environment.NewLine}";
+                    lblTeslimEdilenler.Text += $"{musteriAdi.ToUpper()} ürününüz hazır!{Environment.NewLine}";
+                    lblTeslimEdilenler.ForeColor = Color.Green;
                     calisanlar[i].MusaitlikDurumu = true;
                     break;
                 }
@@ -168,6 +164,12 @@ namespace KahveSiparis.UI
             return false;
         }
 
+        private void btnGeri_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 form1 = new Form1();
+            form1.ShowDialog();
 
+        }
     }
 }

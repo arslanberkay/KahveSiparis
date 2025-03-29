@@ -11,10 +11,10 @@ namespace KahveSiparis.UI
 
         List<Calisan> calisanlar = new List<Calisan>
        {
-           new Calisan{AdSoyad = "Berkay Arslan"},
-           new Calisan{AdSoyad = "Ekrem Hosanlý"},
-           new Calisan{AdSoyad = "Talha Din"},
-           new Calisan{AdSoyad = "Doða Yýldýz"},
+           new Calisan{AdSoyad = "Berkay Arslan",CalismaAlani="Ürün Hazýrlama"},
+           new Calisan{AdSoyad = "Ekrem Hosanlý",CalismaAlani="Ürün Hazýrlama"},
+           new Calisan{AdSoyad = "Talha Din", CalismaAlani = "Kasa"},
+           new Calisan{AdSoyad = "Doða Yýldýz",CalismaAlani="Ürün Hazýrlama"},
        };
 
         private void CalisanAlanlariGoster()
@@ -27,6 +27,7 @@ namespace KahveSiparis.UI
         {
             CalisanAlanlariGoster();
             DataGridViewTabloOlustur();
+            Temizle();
         }
 
         private void DataGridViewTabloOlustur()
@@ -63,6 +64,15 @@ namespace KahveSiparis.UI
             calisanlar.Add(calisan);
 
             TabloyuGuncelle();
+            MessageBox.Show($"Yeni çalýþan ekleme iþlemi baþarýlý! Aktif çalýþan sayýsý : {calisanlar.Count} ");
+            Temizle();
+        }
+
+        private void Temizle()
+        {
+            txtCalisanAdSoyad.Text = string.Empty;
+            cbCalismaAlanlari.SelectedItem = null;
+            dgvCalisanlar.ClearSelection(); //Seçili satýrlarý kaldýrýr.
         }
 
         private void dgvCalisanlar_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -86,6 +96,8 @@ namespace KahveSiparis.UI
             calisanlar.Remove(silinecekCalisan);
 
             TabloyuGuncelle();
+            MessageBox.Show($"Çalýþan silme iþlemi baþarýyla sonuçlandý! Aktif çalýþan : {calisanlar.Count}");
+            Temizle();
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
@@ -96,11 +108,18 @@ namespace KahveSiparis.UI
                 return;
             }
 
+            //Çalýþanlarý listede güncelle
             Calisan guncellenecekCalisan = dgvCalisanlar.SelectedRows[0].DataBoundItem as Calisan;
             guncellenecekCalisan.AdSoyad = txtCalisanAdSoyad.Text;
             guncellenecekCalisan.CalismaAlani = cbCalismaAlanlari.SelectedItem.ToString();
 
+            
+
+            
+
             TabloyuGuncelle();
+            MessageBox.Show("Çalýþan baþarýyla güncellendi!");
+            Temizle();
         }
 
         private void btnYerlestir_Click(object sender, EventArgs e)
@@ -117,17 +136,18 @@ namespace KahveSiparis.UI
                 if (calisan.CalismaAlani == "Kasa")
                 {
                     dagilimSayisi++;
-                    calisan.MusaitlikDurumu = false; 
-                }
-                if (!(dagilimSayisi > 0 && dagilimSayisi < 2))
-                {
-                    MessageBox.Show("Kasada en fazla 2 en az 1 çalýþan olabilir.");
-                    return;
+                    calisan.MusaitlikDurumu = false;
                 }
             }
-
+            if (!(dagilimSayisi >= 1 && dagilimSayisi <= 2))
+            {
+                MessageBox.Show("Kasada en fazla 2 en az 1 çalýþan olabilir.");
+                return;
+            }
+            this.Hide();
             Form2 form2 = new Form2(calisanlar);
             form2.ShowDialog();
+
         }
     }
 }

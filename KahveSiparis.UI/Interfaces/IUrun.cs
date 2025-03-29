@@ -16,8 +16,5 @@ namespace KahveSiparis.UI.Interfaces
         public double BegenilmeOrani { get; set; }
         public List<EkstraMalzemeler> EkstraMalzemelerListesi { get; set; }
 
-        
-
-
     }
 }

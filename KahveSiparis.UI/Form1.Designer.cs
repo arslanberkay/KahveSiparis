@@ -102,6 +102,7 @@
             // 
             // dgvCalisanlar
             // 
+            dgvCalisanlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCalisanlar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCalisanlar.Location = new Point(76, 328);
             dgvCalisanlar.Name = "dgvCalisanlar";
