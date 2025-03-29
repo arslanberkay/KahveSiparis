@@ -44,6 +44,7 @@ namespace KahveSiparis.UI
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrWhiteSpace(txtCalisanAdSoyad.Text))
             {
                 MessageBox.Show("Çalýþan ad soyad boþ olmamalýdýr!");
@@ -85,8 +86,6 @@ namespace KahveSiparis.UI
             calisanlar.Remove(silinecekCalisan);
 
             TabloyuGuncelle();
-
-
         }
 
         private void btnGuncelle_Click(object sender, EventArgs e)
@@ -102,9 +101,32 @@ namespace KahveSiparis.UI
             guncellenecekCalisan.CalismaAlani = cbCalismaAlanlari.SelectedItem.ToString();
 
             TabloyuGuncelle();
-
         }
 
+        private void btnYerlestir_Click(object sender, EventArgs e)
+        {
+            if (dgvCalisanlar.Rows.Count != 4)
+            {
+                MessageBox.Show("Toplamda 4 çalýþan olmalýdýr.");
+                return;
+            }
 
+            int dagilimSayisi = 0;
+            foreach (var calisan in calisanlar)
+            {
+                if (calisan.CalismaAlani == "Kasa")
+                {
+                    dagilimSayisi++;
+                }
+                if (dagilimSayisi > 2)
+                {
+                    MessageBox.Show("Kasada en fazla 2 çalýþan olabilir.");
+                    return;
+                }
+            }
+
+            Form2 form2 = new Form2(calisanlar);
+            form2.ShowDialog();
+        }
     }
 }

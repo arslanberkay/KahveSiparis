@@ -37,6 +37,7 @@
             dgvCalisanlar = new DataGridView();
             btnSil = new Button();
             btnEkle = new Button();
+            btnYerlestir = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvCalisanlar).BeginInit();
             SuspendLayout();
@@ -131,11 +132,22 @@
             btnEkle.UseVisualStyleBackColor = true;
             btnEkle.Click += btnEkle_Click;
             // 
+            // btnYerlestir
+            // 
+            btnYerlestir.Location = new Point(75, 568);
+            btnYerlestir.Name = "btnYerlestir";
+            btnYerlestir.Size = new Size(415, 63);
+            btnYerlestir.TabIndex = 6;
+            btnYerlestir.Text = "Yerleştir";
+            btnYerlestir.UseVisualStyleBackColor = true;
+            btnYerlestir.Click += btnYerlestir_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(562, 639);
+            ClientSize = new Size(562, 659);
+            Controls.Add(btnYerlestir);
             Controls.Add(dgvCalisanlar);
             Controls.Add(btnEkle);
             Controls.Add(btnSil);
@@ -163,5 +175,6 @@
         private TextBox txtCalisanAdSoyad;
         private Button btnSil;
         private Button btnEkle;
+        private Button btnYerlestir;
     }
 }
