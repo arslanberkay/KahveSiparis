@@ -37,7 +37,10 @@
             label2 = new Label();
             label1 = new Label();
             lstvSiparisler = new ListView();
+            panel1 = new Panel();
+            lblHazirlanmaAlani = new Label();
             groupBox1.SuspendLayout();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
@@ -92,6 +95,7 @@
             // 
             // cbUrunler
             // 
+            cbUrunler.DropDownStyle = ComboBoxStyle.DropDownList;
             cbUrunler.FormattingEnabled = true;
             cbUrunler.Location = new Point(199, 75);
             cbUrunler.Name = "cbUrunler";
@@ -120,15 +124,31 @@
             // 
             lstvSiparisler.Location = new Point(590, 73);
             lstvSiparisler.Name = "lstvSiparisler";
-            lstvSiparisler.Size = new Size(1027, 339);
+            lstvSiparisler.Size = new Size(1027, 321);
             lstvSiparisler.TabIndex = 1;
             lstvSiparisler.UseCompatibleStateImageBehavior = false;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(lblHazirlanmaAlani);
+            panel1.Location = new Point(100, 489);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1428, 281);
+            panel1.TabIndex = 2;
+            // 
+            // lblHazirlanmaAlani
+            // 
+            lblHazirlanmaAlani.Location = new Point(51, 26);
+            lblHazirlanmaAlani.Name = "lblHazirlanmaAlani";
+            lblHazirlanmaAlani.Size = new Size(1290, 153);
+            lblHazirlanmaAlani.TabIndex = 0;
             // 
             // Form2
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1704, 788);
+            Controls.Add(panel1);
             Controls.Add(lstvSiparisler);
             Controls.Add(groupBox1);
             Font = new Font("Segoe UI", 12F);
@@ -137,6 +157,7 @@
             Load += Form2_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -151,5 +172,7 @@
         private ComboBox cbUrunler;
         private Button btnSiparisAl;
         private ListView lstvSiparisler;
+        private Panel panel1;
+        private Label lblHazirlanmaAlani;
     }
 }

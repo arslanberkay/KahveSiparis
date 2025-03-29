@@ -35,8 +35,6 @@ namespace KahveSiparis.UI
            new Icecek{UrunAdi="Latte",BegenilmeOrani = 9.1,HazirlanmaSuresi = 11000}
         };
 
-        List<EkstraMalzemeler> ekstraMalzemeler = new List<EkstraMalzemeler>();
-
         private void UrunleriGetir()
         {
             foreach (var urun in urunler)
@@ -60,6 +58,8 @@ namespace KahveSiparis.UI
             TabloOlustur();
         }
 
+
+
         private void btnSiparisAl_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtMusteriAdi.Text))
@@ -73,25 +73,59 @@ namespace KahveSiparis.UI
                 return;
             }
 
-            IUrun seciliUrun = cbUrunler.SelectedItem as Icecek;
-            seciliUrun.MusteriAdiSoyadi = txtMusteriAdi.Text;
+           
+            Icecek orijinalUrun = cbUrunler.SelectedItem as Icecek;
+            IUrun seciliUrun = new Icecek
+            {
+                UrunAdi = orijinalUrun.UrunAdi,
+                BegenilmeOrani = orijinalUrun.BegenilmeOrani,
+                HazirlanmaSuresi = orijinalUrun.HazirlanmaSuresi,
+                MusteriAdiSoyadi = txtMusteriAdi.Text
+            };
+          
 
+            seciliUrun.EkstraMalzemelerListesi.Clear();
+
+            int ekstraMalzemelerinHazirlanmaSuresi = 0;
             foreach (var seciliEkstraMalzeme in chklbEkstraMalzemeler.CheckedItems)
             {
                 if (seciliEkstraMalzeme is EkstraMalzemeler ekstraMalzeme) //Enum türüne dönüştürdüm ve o şekilde listeye ekledim.
                 {
                     seciliUrun.EkstraMalzemelerListesi.Add(ekstraMalzeme);
+                    ekstraMalzemelerinHazirlanmaSuresi += (int)ekstraMalzeme; //Ekstra malzemeler enumundaki karşılık değerleri ekledim
                 }
             }
+            seciliUrun.HazirlanmaSuresi += ekstraMalzemelerinHazirlanmaSuresi;
 
             ListViewItem listViewItem = new ListViewItem();
             listViewItem.Text = seciliUrun.MusteriAdiSoyadi;
             listViewItem.SubItems.Add(seciliUrun.UrunAdi);
             listViewItem.SubItems.Add(seciliUrun.BegenilmeOrani.ToString());
             listViewItem.SubItems.Add(string.Join(", ", seciliUrun.EkstraMalzemelerListesi));
+            listViewItem.SubItems.Add((seciliUrun.HazirlanmaSuresi / 1000).ToString());
 
-            lstvSiparisler.Items.Add(listViewItem);
+            if (MusaitCalisanVarmi())
+            {
+                lstvSiparisler.Items.Add(listViewItem);
+                CalisanaGonder(seciliUrun.MusteriAdiSoyadi, seciliUrun.HazirlanmaSuresi);
+            }
+            else
+            {
+                MessageBox.Show("Şuanda tüm çalışanlarımız dolu!");
+            }
+            Temizle();
+        }
 
+        private void Temizle()
+        {
+            txtMusteriAdi.Text = string.Empty;
+            cbUrunler.SelectedItem = null;
+
+            //CheckedBox içindeki tüm seçili olan itemların seçili olma durumlarını false çektim.
+            for (int i = 0; i < chklbEkstraMalzemeler.Items.Count; i++)
+            {
+                chklbEkstraMalzemeler.SetItemChecked(i, false);
+            }
         }
 
         private void TabloOlustur()
@@ -102,6 +136,38 @@ namespace KahveSiparis.UI
             lstvSiparisler.Columns.Add("Ürün", 200);
             lstvSiparisler.Columns.Add("Beğenilme Oranı", 200);
             lstvSiparisler.Columns.Add("Ekstra Malzemeler", 200);
+            lstvSiparisler.Columns.Add("Hazırlanma Süresi", 200);
+
         }
+
+        private async void CalisanaGonder(string musteriAdi, int hazirlanmaSuresi)
+        {
+            for (int i = 0; i < calisanlar.Count; i++)
+            {
+                if (calisanlar[i].MusaitlikDurumu)
+                {
+                    lblHazirlanmaAlani.Text += $"{calisanlar[i].AdSoyad} => Merhaba {musteriAdi.ToUpper()}. Siparişini {hazirlanmaSuresi / 1000} saniye içinde hazırlıyorum.{Environment.NewLine}";
+                    calisanlar[i].MusaitlikDurumu = false;
+                    await Task.Delay(hazirlanmaSuresi);
+                    lblHazirlanmaAlani.Text += $"{musteriAdi.ToUpper()} ürününüz hazır!{Environment.NewLine}";
+                    calisanlar[i].MusaitlikDurumu = true;
+                    break;
+                }
+            }
+        }
+
+        private bool MusaitCalisanVarmi()
+        {
+            for (int i = 0; i < calisanlar.Count; i++)
+            {
+                if (calisanlar[i].MusaitlikDurumu)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
     }
 }

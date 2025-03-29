@@ -10,8 +10,9 @@ namespace KahveSiparis.UI.Interfaces
     {
         public string AdSoyad { get; set; }
         public string CalismaAlani { get; set; }
-        public bool MusaitlikDurumu { get; set; }
-       
+        public bool MusaitlikDurumu { get; set; } = true;
+
+
 
         public override string ToString()
         {

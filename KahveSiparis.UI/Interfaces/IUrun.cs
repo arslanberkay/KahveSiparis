@@ -14,7 +14,9 @@ namespace KahveSiparis.UI.Interfaces
         public string UrunAdi { get; set; }
         public int HazirlanmaSuresi { get; set; }
         public double BegenilmeOrani { get; set; }
-        public List<EkstraMalzemeler> EkstraMalzemelerListesi { get; set; } 
+        public List<EkstraMalzemeler> EkstraMalzemelerListesi { get; set; }
+
+        
 
 
     }

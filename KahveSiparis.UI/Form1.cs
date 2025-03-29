@@ -117,10 +117,11 @@ namespace KahveSiparis.UI
                 if (calisan.CalismaAlani == "Kasa")
                 {
                     dagilimSayisi++;
+                    calisan.MusaitlikDurumu = false; 
                 }
-                if (dagilimSayisi > 2)
+                if (!(dagilimSayisi > 0 && dagilimSayisi < 2))
                 {
-                    MessageBox.Show("Kasada en fazla 2 çalışan olabilir.");
+                    MessageBox.Show("Kasada en fazla 2 en az 1 çalışan olabilir.");
                     return;
                 }
             }
